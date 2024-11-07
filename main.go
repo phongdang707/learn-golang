@@ -13,7 +13,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -43,14 +42,12 @@ func main() {
 			// items.GET("/", ListItem(db))
 			items.POST("/", ginitem.CreateItem(db))
 			items.GET("/:id", ginitem.GetItem(db))
-			// items.PUT("/:id", UpdateItem(db))
+			items.PUT("/:id", ginitem.UpdateItem(db))
 			// items.DELETE("/:id", DeleteItem(db))
 		}
 	}
 	r.Run(":8080")
 }
-
-
 
 // func GetItem(db *gorm.DB) func(ctx *gin.Context) {
 // 	return func(c *gin.Context) {
@@ -72,7 +69,7 @@ func main() {
 // func UpdateItem(db *gorm.DB) func(ctx *gin.Context) {
 // 	return func(c *gin.Context) {
 // 		var itemData TodoItemUpdate
-		
+
 // 		id, err := strconv.Atoi(c.Param("id"))
 // 		if err != nil {
 // 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -119,7 +116,7 @@ func main() {
 // 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 // 			return
 // 		}
-// 		paging.Process()	
+// 		paging.Process()
 // 		if err := db.Order("id desc").Offset((paging.Page - 1) * paging.Limit).Limit(paging.Limit).Find(&result).Count(&paging.Total).Error; err != nil {
 // 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 // 			return
